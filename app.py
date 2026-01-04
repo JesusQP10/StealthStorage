@@ -8,7 +8,7 @@ from tkinter import filedialog
 ctk.set_appearance_mode("Dark")
 ctk.set_default_color_theme("dark-blue") 
 
-# --- PREMIUM PALETTE ---
+# --- PALETTE ---
 COLOR_BG = "#0f1012"
 COLOR_CARD = "#1a1c21"
 COLOR_ACCENT = "#3B8ED0"
@@ -18,7 +18,7 @@ COLOR_TEXT_DIM = "#8d8d99"
 COLOR_DIVIDER = "#2b2d31"
 COLOR_HOVER = "#232529" 
 
-# --- DUMMY LOGIC ---
+# --- LOGIC ---
 try:
     from src.compressor import compress_image
     from src.privacy import strip_metadata
@@ -80,7 +80,7 @@ class App(ctk.CTk):
         self.radio_container = ctk.CTkFrame(self.frame_config, fg_color="transparent")
         self.radio_container.pack(fill="x")
 
-        # CREACIÓN DE OPCIONES CON GRID (Súper Alineación)
+        # CREACIÓN DE OPCIONES 
         self.create_grid_option(" Full Optimization", 1, "🚀", 0)
         self.create_grid_option("Privacy Only", 2, "🛡️", 1)
         self.create_grid_option(" Compression Only", 3, "📦", 2)
@@ -118,13 +118,13 @@ class App(ctk.CTk):
 
         self.welcome_msg()
 
-    # --- NUEVA FUNCIÓN DE OPCIONES CON GRID ---
+    
     def create_grid_option(self, text, val, icon, row_idx):
         # Frame contenedor
         container = ctk.CTkFrame(self.radio_container, fg_color="transparent", corner_radius=6)
         container.pack(fill="x", pady=2)
         
-        # Configuramos las columnas del contenedor para que sean fijas
+        # Configuración columnas 
         container.grid_columnconfigure(0, minsize=35) # Columna para el Radio
         container.grid_columnconfigure(1, minsize=40) # Columna para el Icono (ANCHO FIJO CLAVE)
         container.grid_columnconfigure(2, weight=1)   # Columna para el Texto
@@ -133,11 +133,11 @@ class App(ctk.CTk):
         r = ctk.CTkRadioButton(container, text="", variable=self.radio_var, value=val, width=20, height=20)
         r.grid(row=0, column=0, padx=(10, 0), pady=10)
 
-        # 2. Icono (Centrado en su columna de 40px)
+        # 2. Icono 
         icon_lbl = ctk.CTkLabel(container, text=icon, font=("Segoe UI", 16))
         icon_lbl.grid(row=0, column=1, sticky="w")
 
-        # 3. Texto (Empezará siempre en el mismo sitio gracias a minsize de col 1)
+        # 3. Texto 
         text_lbl = ctk.CTkLabel(container, text=text, font=("Segoe UI", 13), text_color=COLOR_TEXT)
         text_lbl.grid(row=0, column=2, sticky="w")
 
@@ -186,10 +186,10 @@ class App(ctk.CTk):
         mode = self.radio_var.get()
         saved = 0
         time.sleep(0.5)
-        # Dentro de tu app.py
-        print(f"Ruta enviada al motor: {self.folder_path}") # <--- AÑADE ESTO
+        
+        print(f"Ruta enviada al motor: {self.folder_path}") 
         count, size = find_and_remove_duplicates(self.folder_path)
-        # (Lógica simplificada para el ejemplo)
+        
         files = [os.path.join(r, f) for r, _, fs in os.walk(folder) for f in fs if f.lower().endswith(('.jpg','.jpeg','.png'))]
         if not files:
             self.log("No valid images found.")
